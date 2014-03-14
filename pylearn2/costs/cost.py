@@ -553,6 +553,34 @@ class CrossEntropy(DefaultDataSpecsMixin, Cost):
                 (1 - Y) * T.log(1 - model(X))).sum(axis=1).mean()
 
 
+class MSECost(DefaultDataSpecsMixin, Cost):
+    """
+    .. todo::
+
+       WRITEME
+    """
+
+    def __init__(self):
+        """
+        .. todo::
+
+            WRITEME
+        """
+        self.supervised = True
+
+    def expr(self, model, data, ** kwargs):
+        """
+        .. todo::
+
+            WRITEME
+        """
+        self.get_data_specs(model)[0].validate(data)
+
+        # unpack data
+        (X, Y) = data
+        return T.square(Y - model.fprop(X)).mean()
+
+
 class MethodCost(Cost):
     """
     A cost specified via the string name of a method of the model.
